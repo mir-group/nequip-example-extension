@@ -1,0 +1,77 @@
+# Example YAML file for using the example "AddNoiseToPairEnergies" Allegro extension in this package
+# HYPERPARAMETERS ARE BASED ON Allegro's `minimal.yaml` and are NOT meant for real training!
+
+# general
+root: results/aspirin
+run_name: allegro-addnoise
+seed: 123456
+dataset_seed: 123456
+
+# -- network --
+model_builders:
+ - allegro.model.Allegro
+ - nequip_example_extension.model.AddNoiseToPairEnergies  # <- !! note this goes right after building the core Allegro model, since we want to add things to that *before* we wrap it in scalings and gradient computations with the following model builders
+ - PerSpeciesRescale
+ - ForceOutput
+ - RescaleEnergyEtc
+
+noise_sigma: 0.05 # options from the config will propagate through the initialization system to the AddNoiseModule module
+
+# cutoffs
+r_max: 6.0
+
+# network symmetry
+l_max: 1
+parity: o3_full  
+
+# allegro layers:
+num_layers: 1
+env_embed_multiplicity: 32
+two_body_latent_mlp_latent_dimensions: [32, 64]
+two_body_latent_mlp_nonlinearity: silu
+
+latent_mlp_latent_dimensions: [64]
+latent_mlp_nonlinearity: silu
+
+latent_resnet: true
+
+env_embed_mlp_latent_dimensions: []
+env_embed_mlp_nonlinearity: null
+
+edge_eng_mlp_latent_dimensions: [32]
+edge_eng_mlp_nonlinearity: null
+
+# data set
+dataset: npz 
+dataset_url: http://quantum-machine.org/gdml/data/npz/aspirin_ccsd.zip
+dataset_file_name: ./benchmark_data/aspirin_ccsd-train.npz
+key_mapping:
+  z: atomic_numbers
+  E: total_energy
+  F: forces
+  R: pos
+npz_fixed_field_keys:
+  - atomic_numbers
+
+# A mapping of chemical species to type indexes is necessary if the dataset is provided with atomic numbers instead of type indexes.
+chemical_symbol_to_type:
+  H: 0
+  C: 1
+  O: 2
+
+# logging
+wandb: false
+verbose: info
+
+# training
+n_train: 25
+n_val: 5
+batch_size: 1
+max_epochs: 10
+learning_rate: 0.002
+
+# loss function
+loss_coeffs: total_energy
+
+# optimizer
+optimizer_name: Adam

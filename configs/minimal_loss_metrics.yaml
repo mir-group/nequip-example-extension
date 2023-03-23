@@ -1,4 +1,5 @@
 # Example of running a minimal network with a custom loss and metrics
+# HYPERPARAMETERS ARE BASED ON NequIP's `minimal.yaml` and are NOT meant for real training!
 
 # loss and metrics
 loss_coeffs:
