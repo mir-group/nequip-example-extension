@@ -1,6 +1,6 @@
 # Example extension package for `nequip`
 
-<img src="./logo.png" height="1.5in" />
+<img src="logo.png" height="1.5in" />
 
 This repository serves as an example and template for writing extension packages for the [`nequip` framework](https://github.com/mir-group/nequip) for (equivariant) machine learning on atomic systems. Extension packages to `nequip` can implement new models, new model components and wrappers that can be mixed with or added to existing models, 
 
