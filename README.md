@@ -6,16 +6,6 @@ This repository serves as an example and template for writing extension packages
 
 For an interactive tutorial please see the last section [the Allegro tutorial Colab](https://colab.research.google.com/drive/1yq2UwnET4loJYg_Fptt9kpklVaZvoHnq).
 
-## FAQ
-
-**What about LAMMPS?**
-
-If your model modules / additions are fully TorchScript compatible, then your modified/extended models **can be used in the corresponding LAMMPS plugin for MD** ([`pair_nequip`](https://github.com/mir-group/pair_nequip) for the general case, and [`pair_allegro`](https://github.com/mir-group/pair_allegro) for Allegro models.)
-
-**Extension package vs pull request?**
-
-We welcome pull requests and contributions to the [`nequip`](https://github.com/mir-group/nequip) and [`allegro`](https://github.com/mir-group/allegro/) repositories and generally smaller **new features of general interest should be pull requests** on those repositories. If you aren't sure what is most appropriate for your idea, please always feel free to reach out via GitHub Discussions or email at albym[at]seas[dot]harvard[dot]edu.
-
 ## Contents
 
 ### Model customization
@@ -30,4 +20,14 @@ Extensions like this can be used from the existing YAML config files you are fam
 
 ### Custom loss functions and metrics
 
-See `loss_terms.py` and `metrics.py`.
+See `loss_terms.py` and `metrics.py`.  Please not that custom loss functions are **NOT** necessary if you want to use a conventional loss on a new prediction / field / property.  Just like the existing loss functions/metrics can be used transparently on both energy and forces according to the specification in `nequip`'s `full.yaml`, they can extend to other fields by giving the correct name.  All that is required is for that field to be present both in the model's predictions and the dataset. Rather, custom loss functions / metrics are for different **functional forms** of the loss/metric, regardless of what field they are applied to, or for custom metrics/losses that depend on multiple fields and ignore the `key` passed through from the YAML config.
+
+## FAQ
+
+**What about LAMMPS?**
+
+If your model modules / additions are fully TorchScript compatible, then your modified/extended models **can be used in the corresponding LAMMPS plugin for MD** ([`pair_nequip`](https://github.com/mir-group/pair_nequip) for the general case, and [`pair_allegro`](https://github.com/mir-group/pair_allegro) for Allegro models.)
+
+**Extension package vs pull request?**
+
+We welcome pull requests and contributions to the [`nequip`](https://github.com/mir-group/nequip) and [`allegro`](https://github.com/mir-group/allegro/) repositories and generally smaller **new features of general interest should be pull requests** on those repositories. If you aren't sure what is most appropriate for your idea, please always feel free to reach out via GitHub Discussions or email at albym[at]seas[dot]harvard[dot]edu.
