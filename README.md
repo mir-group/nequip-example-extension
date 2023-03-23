@@ -1,5 +1,7 @@
 # Example extension package for `nequip`
 
+<img src="./logo.png" height="1.5in" />
+
 This repository serves as an example and template for writing extension packages for the [`nequip` framework](https://github.com/mir-group/nequip) for (equivariant) machine learning on atomic systems. Extension packages to `nequip` can implement new models, new model components and wrappers that can be mixed with or added to existing models, 
 
 For an interactive tutorial please see the last section [the Allegro tutorial Colab](https://colab.research.google.com/drive/1yq2UwnET4loJYg_Fptt9kpklVaZvoHnq).
