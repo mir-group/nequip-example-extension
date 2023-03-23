@@ -25,3 +25,7 @@ def AddNoiseToPairEnergies(
         builder=AddNoiseModule,
     )
     return model
+
+
+# If your modifications are more extensive, you can also copy and update the full Allegro model builder from `allegro/model/_allegro.py`.
+# This can be pariticularly helpful if you are _replacing_, rather than adding, modules.
