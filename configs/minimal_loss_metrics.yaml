@@ -1,0 +1,57 @@
+# Example of running a minimal network with a custom loss and metrics
+
+# loss and metrics
+loss_coeffs:
+  forces:
+    - 1.0
+    - !!python/object:nequip_example_extension.loss_terms.MyL1Loss {}
+
+metrics_components:
+  - - forces
+    - mae
+  - - node_features
+    - mean
+    - functional: !!python/object:nequip_example_extension.metrics.ExampleLnNormMetric {"ord": 2}
+
+# general
+root: results/aspirin
+run_name: minimal
+seed: 123
+dataset_seed: 456
+
+# network
+num_basis: 8
+r_max: 4.0
+l_max: 2
+parity: true
+num_features: 16
+
+# data set
+dataset: npz 
+dataset_url: http://quantum-machine.org/gdml/data/npz/aspirin_ccsd.zip
+dataset_file_name: ./benchmark_data/aspirin_ccsd-train.npz
+key_mapping:
+  z: atomic_numbers
+  E: total_energy
+  F: forces
+  R: pos
+npz_fixed_field_keys:
+  - atomic_numbers
+
+chemical_symbols:
+  - H
+  - O
+  - C
+
+# logging
+wandb: false
+
+# training
+n_train: 10
+n_val: 5
+batch_size: 1
+validation_batch_size: 5
+max_epochs: 10
+
+# optimizer
+optimizer_name: Adam
