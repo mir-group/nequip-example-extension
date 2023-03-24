@@ -30,4 +30,4 @@ If your model modules / additions are fully TorchScript compatible, then your mo
 
 **Extension package vs pull request?**
 
-We welcome pull requests and contributions to the [`nequip`](https://github.com/mir-group/nequip) and [`allegro`](https://github.com/mir-group/allegro/) repositories and generally smaller **new features of general interest should be pull requests** on those repositories. If you aren't sure what is most appropriate for your idea, please always feel free to reach out via GitHub Discussions or email at albym[at]seas[dot]harvard[dot]edu.
+We welcome pull requests and contributions to the [`nequip`](https://github.com/mir-group/nequip) and [`allegro`](https://github.com/mir-group/allegro/) repositories and generally smaller **new features of general interest should be pull requests** on those repositories. If you aren't sure what is most appropriate for your idea, please always feel free to reach out via GitHub Discussions or email at albym[at]seas[dot]harvard[dot]edu.  See also [`CONTRIBUTING.md`](https://github.com/mir-group/nequip/blob/main/CONTRIBUTING.md).
