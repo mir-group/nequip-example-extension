@@ -1,5 +1,6 @@
-# Example of running a minimal network with a custom loss and metrics
+# Example of running a minimal network with a custom output head to predict a custom field as well.
 # HYPERPARAMETERS ARE BASED ON NequIP's `minimal.yaml` and are NOT meant for real training!
+# !! THIS IS AN ILLUSTRATIVE EXAMPLE; ACHEIVING GOOD RESULTS REQUIRES CAREFUL THOUGHT ABOUT NORMALIZATION AND ARCHITECTURE !!
 
 # Running this config depends on some fake data that can be generated as follows:
 # $ python scripts/fake_per_atom_data.py
