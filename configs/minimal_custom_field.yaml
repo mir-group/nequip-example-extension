@@ -1,0 +1,65 @@
+# Example of running a minimal network with a custom loss and metrics
+# HYPERPARAMETERS ARE BASED ON NequIP's `minimal.yaml` and are NOT meant for real training!
+
+# Running this config depends on some fake data that can be generated as follows:
+# $ python scripts/fake_per_atom_data.py
+# This data contains some noisy force magnitudes as an extra, scalar, per-atom field.
+
+# general
+root: results/aspirin
+run_name: minimal
+seed: 123
+dataset_seed: 456
+
+# The default NequIP model builders
+model_builders:
+  - SimpleIrrepsConfig
+  - EnergyModel
+  - nequip_example_extension.model.CustomOutputHead  # <--- add our new model builder that adds the extra output head
+  - PerSpeciesRescale
+  - StressForceOutput
+  - nequip_example_extension.model.RescaleCustomField  # <-- add rescaling for our new prediction
+  - RescaleEnergyEtc
+
+# network
+num_basis: 8
+r_max: 4.0
+l_max: 2
+parity: true
+num_features: 16
+
+# data set
+dataset: npz 
+dataset_url: 
+dataset_file_name: ./benchmark_data/aspirin_ccsd-train-fakedata.npz
+key_mapping:
+  z: atomic_numbers
+  E: total_energy
+  F: forces
+  R: pos
+  x: my_custom_field  # <-- note that we map the custom key here too
+npz_fixed_field_keys:
+  - atomic_numbers
+
+chemical_symbols:
+  - H
+  - O
+  - C
+
+# logging
+wandb: false
+
+# training
+n_train: 10
+n_val: 5
+batch_size: 1
+validation_batch_size: 5
+max_epochs: 10
+
+# loss function
+loss_coeffs:
+  forces: 1.0
+  my_custom_field: 0.5  # <-- add a custom field to the loss functions. This defaults to a simple MSE loss, which is appropriate for a per-atom quantity.
+
+# optimizer
+optimizer_name: Adam
